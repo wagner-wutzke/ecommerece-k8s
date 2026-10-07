@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: es-cluster
+  name: elasticsearch
   namespace: logging
 spec:
   serviceName: elasticsearch # Links StatefulSet to headless service , Enables stable DNS.
@@ -26,7 +26,7 @@ spec:
               memory: 1Gi
             requests:
               cpu: 500m
-              memory: 1Gi
+              memory: 500Mi
 
           ports:
             - containerPort: 9200
@@ -46,19 +46,18 @@ spec:
             - name: node.name
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.name # Each pod uses its own name (es-cluster-0).
+                  fieldPath: metadata.name # Each pod uses its own name (elasticsearch-0).
 
             - name: discovery.seed_hosts # List of all Elasticsearch pods, Required for node discovery.
-              value: "es-cluster-0.elasticsearch,es-cluster-1.elasticsearch,es-cluster-2.elasticsearch"
+              value: "elasticsearch-0.elasticsearch"
 
             - name: cluster.initial_master_nodes # Prevents split-brain during first startup.
-              value: "es-cluster-0,es-cluster-1,es-cluster-2"
+              value: "elasticsearch-0"
 
             - name: ES_JAVA_OPTS
               value: "-Xms512m -Xmx512m" # JVM heap settings.
 
       initContainers: #  Run before Elasticsearch starts.
-
         - name: fix-permission # Fixes file ownership for mounted volume.
           image: busybox
           command: ["sh", "-c", "chown -R 1000:1000 /usr/share/elasticsearch/data"]
