@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
-  namespace: kube-logging
+  namespace: logging
   labels:
     app: kibana
 
@@ -34,7 +34,6 @@ spec:
           env:
             - name: ELASTICSEARCH_URL
               value: http://elasticsearch:9200
-
 
           ports:
             - containerPort: 5601
