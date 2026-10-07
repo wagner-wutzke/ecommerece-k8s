@@ -1,0 +1,96 @@
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kafka-pvc
+  namespace: ecommerce
+spec:
+  storageClassName: ebs-storage
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: orders-pvc
+  namespace: ecommerce
+spec:
+  storageClassName: ebs-storage
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: customers-pvc
+  namespace: ecommerce
+spec:
+  storageClassName: ebs-storage
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: inventory-pvc
+  namespace: ecommerce
+spec:
+  storageClassName: ebs-storage
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: payments-pvc
+  namespace: ecommerce
+spec:
+  storageClassName: ebs-storage
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: invoices-pvc
+  namespace: ecommerce
+spec:
+  storageClassName: ebs-storage
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shipments-pvc
+  namespace: ecommerce
+spec:
+  storageClassName: ebs-storage
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi

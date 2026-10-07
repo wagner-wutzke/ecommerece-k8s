@@ -1,0 +1,23 @@
+# values.yaml
+esJavaOpts: "-Xms1g -Xmx1g"
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"   # raised from 512Mi
+  limits:
+    cpu: "1"
+    memory: "1Gi"
+
+readinessProbe:
+  # The Helm chart for elasticsearch uses this to template the probe script
+  # Change the cluster health check to yellow for single-node deployments
+  initialDelaySeconds: 10
+  timeoutSeconds: 5
+  periodSeconds: 10
+  successThreshold: 3
+  failureThreshold: 3
+
+#  helm upgrade elasticsearch elastic/elasticsearch \
+#  -n logging \
+#  -f values.yaml
